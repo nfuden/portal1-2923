@@ -1,0 +1,811 @@
+apiVersion: gateway.solo.io/v1
+kind: RouteTable
+metadata:
+  labels:
+    apiproducts.portal.gloo.solo.io: httpbin.httpbin
+    apiproducts.portal.gloo.solo.io/version: v1
+    cluster.multicluster.solo.io: ""
+    environments.portal.gloo.solo.io: dev.portal-env
+  name: dev.httpbin.v1
+  namespace: portal-env
+  ownerReferences:
+  - apiVersion: portal.gloo.solo.io/v1beta1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Environment
+    name: dev
+    uid: c3763501-ae35-4d5f-8a37-9a3077d104d0
+spec:
+  routes:
+  - matchers:
+    - prefix: /anything
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./anything
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /brotli
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./brotli
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /deflate
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./deflate
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /delete
+      methods:
+      - DELETE
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./delete
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /get
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./get
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /gzip
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./gzip
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /headers
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./headers
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /ip
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./ip
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /patch
+      methods:
+      - PATCH
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./patch
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /post
+      methods:
+      - POST
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./post
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /put
+      methods:
+      - PUT
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./put
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /redirect-to
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./redirect-to
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /response-headers
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./response-headers
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /user-agent
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./user-agent
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /uuid
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./uuid
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - prefix: /xml
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./xml
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - methods:
+      - GET
+      - OPTIONS
+      regex: /base64/[^/]+?
+    name: httpbin.httpbin.httpbin-schema.httpbin./base64
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - methods:
+      - GET
+      - OPTIONS
+      regex: /bytes/[^/]+?
+    name: httpbin.httpbin.httpbin-schema.httpbin./bytes
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - methods:
+      - GET
+      - OPTIONS
+      regex: /cache/[^/]+?
+    name: httpbin.httpbin.httpbin-schema.httpbin./cache
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - methods:
+      - GET
+      - OPTIONS
+      regex: /delay/[^/]+?
+    name: httpbin.httpbin.httpbin-schema.httpbin./delay
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - methods:
+      - GET
+      - OPTIONS
+      regex: /status/[^/]+?
+    name: httpbin.httpbin.httpbin-schema.httpbin./status
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1
+  - matchers:
+    - methods:
+      - GET
+      - OPTIONS
+      regex: /stream/[^/]+?
+    name: httpbin.httpbin.httpbin-schema.httpbin./stream
+    inheritablePathMatchers: true
+    inheritableMatchers: true
+    options:
+      extauth:
+        configRef:
+          name: httpbin-httpbin-httpbin-httpbin2-dev
+          namespace: portal-env
+      stagedTransformations:
+        early:
+          requestTransforms:
+          - matcher:
+              prefix: /
+            requestTransformation:
+              transformationTemplate:
+                dynamicMetadataValues:
+                - key: environment
+                  value:
+                    text: dev.portal-env
+                - key: api_product
+                  value:
+                    text: httpbin.httpbin
+                passthrough: {}
+    routeAction:
+      multi:
+        destinations:
+        - destination:
+            upstream:
+              name: httpbin-httpbin-8000
+              namespace: httpbin
+          weight: 1

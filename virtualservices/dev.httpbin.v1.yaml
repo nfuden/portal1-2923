@@ -1,0 +1,62 @@
+
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  labels:
+    cluster.multicluster.solo.io: ""
+    environments.portal.gloo.solo.io: dev.portal-env
+  name: dev
+  namespace: portal-env
+  ownerReferences:
+  - apiVersion: portal.gloo.solo.io/v1beta1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Environment
+    name: dev
+    uid: c3763501-ae35-4d5f-8a37-9a3077d104d0
+spec:
+  displayName: Development
+  virtualHost:
+    domains:
+    - api.example.com
+    routes:
+    - delegateAction:
+        ref:
+          name: dev.httpbin2.v1
+          namespace: portal-env
+      matchers:
+      - prefix: /
+      name: httpbin2.v1
+      options:
+        cors:
+          allowCredentials: true
+          allowHeaders:
+          - api-key
+          - Authorization
+          allowOrigin:
+          - http://petstore.example.com
+          - https://petstore.example.com
+        rateLimitConfigs:
+          refs:
+          - name: dev
+            namespace: portal-env
+    - delegateAction:
+        ref:
+          name: dev.httpbin.custom
+          namespace: portal-env
+      matchers:
+      - prefix: /
+      name: httpbin.v1
+      options:
+        cors:
+          allowCredentials: true
+          allowHeaders:
+          - api-key
+          - Authorization
+          allowOrigin:
+          - http://petstore.example.com
+          - https://petstore.example.com
+        rateLimitConfigs:
+          refs:
+          - name: dev
+            namespace: portal-env

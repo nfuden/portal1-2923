@@ -1,0 +1,22 @@
+apiVersion: gateway.solo.io/v1
+kind: RouteTable
+metadata:
+  labels:
+    apiproducts.portal.gloo.solo.io: httpbin.httpbin
+    apiproducts.portal.gloo.solo.io/version: v1
+    cluster.multicluster.solo.io: ""
+    environments.portal.gloo.solo.io: dev.portal-env
+  name: dev.httpbin.custom
+  namespace: portal-env
+spec:
+  routes:
+  - matchers:
+    - prefix: /anything
+      methods:
+      - GET
+      - OPTIONS
+    name: httpbin.httpbin.httpbin-schema.httpbin./anything
+    delegateAction:
+      ref:
+        name: dev.httpbin.v1
+        namespace: portal-env

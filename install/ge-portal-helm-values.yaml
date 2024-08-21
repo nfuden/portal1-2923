@@ -1,0 +1,11 @@
+glooEdge:
+  enabled: true
+licenseKey:
+  secretRef:
+    name: license
+    namespace: gloo-system
+    key: license-key
+glooPortal:
+  env:
+  - name: FEATURE_SHARED_API_DOCS
+    value: "true"

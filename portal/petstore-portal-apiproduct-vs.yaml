@@ -1,0 +1,21 @@
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  name: petstore-portal-api
+  namespace: default
+spec:
+  virtualHost:
+  # ddoyle: This does not work as I now have 2 VS that point to the same domain, which gives an error on Gloo Edge: VirtualHost Error: DomainsNotUniqueError.
+    domains:
+    - petstore.example.com
+    routes:
+    - matchers:
+      - exact: '/apis'
+      name: petstore-portal.api-product-route
+      routeAction:
+        single:
+          upstream:
+            name: gloo-portal.gloo-portal
+            namespace: gloo-portal
+      options:
+        prefixRewrite: '/apis/default/petstore-product?v=v1'

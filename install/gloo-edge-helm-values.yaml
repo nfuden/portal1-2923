@@ -1,0 +1,38 @@
+gloo:
+  settings:
+    disableKubernetesDestinations: true
+  gloo:
+    logLevel: debug
+  discovery:
+    enabled: true
+  gateway:
+    # ddoyle: enabled for debugging purposes to be able to see the Proxy CR. Has performance impact, so don't enable in production environments.
+    persistProxySpec: true
+    # Configure Validating Admission Webhook to reject resources (normally invalid resources are only logged).
+    validation:
+      enabled: true
+      # Reject invalid resources (resources that would result in an error state)
+      alwaysAcceptResources: false
+      # Reject resources that would result in a warning
+      allowWarnings: false
+      # FailurePolicy: can be Ignore or Fail. Defaults to ignore.
+      failurePolicy: Fail
+      warnRouteShortCircuiting: true
+
+      # # Disable validation webhook when deleting the following resources.
+      # webhook:
+      #   skipDeleteValidationResources:
+      #   - upstreams
+      #   - virtualservices
+observability:
+  enabled: false
+prometheus:
+  enabled: false
+gloo-fed:
+  enabled: false
+  glooFedApiserver:
+    enabled: false
+grafana:
+  defaultInstallationEnabled: false
+# redis:
+#   disabled: true
